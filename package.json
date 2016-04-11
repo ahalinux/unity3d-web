@@ -1,0 +1,33 @@
+{
+  "name": "unity3d-web",
+  "version": "1.0.0",
+  "description": "unity3dweb",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahalinux/unity3d-web.git"
+  },
+  "keywords": [
+    "unity3d"
+  ],
+  "author": "ahalinux",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ahalinux/unity3d-web/issues"
+  },
+  "homepage": "https://github.com/ahalinux/unity3d-web#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-concurrent": "^2.3.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-nodemon": "^0.5.2",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-nodemon": "^0.4.1"
+  }
+}

@@ -27,6 +27,7 @@ build/Release
 node_modules
 public/libs
 .idea
+bak
 
 # Optional npm cache directory
 .npm
