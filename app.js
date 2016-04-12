@@ -1,47 +1,44 @@
-var http = require('http');
-var url = require('url');
-var httpParam = require('./http_parm');
+var express = require('express')
+var path = require('path')
+var mongoose = require('mongoose')
+var bodyParser = require('body-parser')
 
-http.createServer(function(req,res){
-    var pathname = url.parse(req.url).pathname;
-    httpParam.init(req, res);
-    switch(pathname){
+var cookieParser = require('cookie-parser')
+var session = require('express-session')
+var mongoStore = require('connect-mongo')(session)
 
-        case '/get' : resGet(res,req);
-            break;
+var serveStatic = require('serve-static')
+var app = express()
 
-        case '/post' : resPost(res, req);
-            break;
+//连接数据库
+var dbUrl = 'mongodb://localhost/dockerm'
+mongoose.connect(dbUrl)
 
-        default : resDefault(res);
-            break;
+//设置视图和模板引擎
+app.set('views','./app/views/pages')
+app.set('view engine','jade')
 
-    }
-}).listen(1337, "192.168.1.14");
+app.use(bodyParser.urlencoded())
+app.use(bodyParser.json())
+app.use(cookieParser())
+app.use(session({
+    secret: 'mylove',
+    resave: false,
+    saveUninitialized: true,
+    store: new mongoStore({
+        url: dbUrl,
+        collection: 'sessions'
+    })
+}))
 
-function resDefault(res){
-    res.end("Default Process");
-}
+app.use(serveStatic(path.join(__dirname,'public')))
 
-/** 同步GET
-function resGet(res){
-    var getData = httpParam.GET();
-    res.end(getData);
-}
-*/
+app.locals.moment = require('moment')
+app.use(serveStatic(path.join(__dirname,'public')))
+app.locals.parsestr = require('./public/js/parsestr.js')
 
-function resGet(res, req){
-    req.setEncoding('utf8');
-    httpParam.GET(function(getData){
-        res.end(getData);
-    });
-}
+require('./config/routes')(app)
 
-function resPost(res, req){
-    req.setEncoding('utf8');
-    httpParam.POST(function(postData){
-        res.end(postData);
-    });
-}
-
-console.log('Server running at http://192.168.1.14:1337');
+var port = process.env.PORT || 5000
+app.listen(port)
+console.log('Site started on port ' + port)
