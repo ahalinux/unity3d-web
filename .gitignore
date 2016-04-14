@@ -26,6 +26,7 @@ build/Release
 # Dependency directory
 node_modules
 public/libs
+public/upload
 .idea
 bak
 

@@ -15,8 +15,8 @@ module.exports = function(app){
     // Index
     app.get('/get', Index.get);
     app.post('/post', Index.post);
-    //app.post('/png', Index.savePng, Index.png);
     app.post('/savepng', multipartMiddleware, Index.savePng);
+    //app.post('/save', Index.save);
 
 
 
