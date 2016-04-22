@@ -58,4 +58,17 @@ exports.savePng = function(req,res,next){
 
 }
 
-exports.save = function(req,res){}
+/*
+exports.getSound = function(req,res){
+
+    var fileName = "/public/sounds/music.wav";
+    res.sendFile(fileName, options, function (err) {
+        if (err) {
+            console.log(err);
+            res.status(err.status).end();
+        }
+        else {
+            console.log('Sent:', fileName);
+        }
+    });
+}*/
